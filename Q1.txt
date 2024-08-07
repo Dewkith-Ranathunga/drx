@@ -1,0 +1,484 @@
+import java.util.*;
+
+public class ArrayAll{
+	
+	public static void printArray(int[] A){
+		
+		int n=A.length;
+		for(int i=0;i<n;i++){
+			System.out.print(A[i] + " ");
+		}
+		System.out.println();
+	}
+	
+	public static boolean searchValue(int[] A,int target){
+		
+		int n = A.length;
+		for(int	i=0;i<n;i++){
+			if(A[i]==target){
+				return true ;
+			}
+		}
+		return false ;
+	}
+	
+	public static void insertionSort(int[] A){
+		int n=A.length;
+		for(int i=1;i<n;i++){
+			int key=A[i];
+			int j=i-1;
+			
+			while((j>-1)&&(A[j]>key)){
+				A[j+1]=A[j];
+				j--;
+			}
+			A[j+1]=key;
+		}
+	}
+	
+	
+	public static void main(String[] args){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int[] Array = new int[10];
+		int size = 5 ;
+		
+		System.out.println("\nInput values for Array");
+		for(int i=0;i<size;i++){
+			Array[i]=sc.nextInt();
+		}
+		
+		System.out.print("\nInputed values of Array : ");
+		printArray(Array);
+		
+		
+		//Inserting a value for specific index
+		
+		System.out.print("\nInsert the value : ");
+		int insertValue = sc.nextInt();
+		
+		System.out.print("\nIndex for inserting : ");
+		int insertIndex = sc.nextInt();
+		
+		for(int i=size-1;i>=insertIndex;i--){
+			Array[i+1]=Array[i];
+		}
+		Array[insertIndex]=insertValue ;
+		size++;
+		
+		System.out.print("\nAfter inserting : ");
+		printArray(Array) ;
+		
+		
+		
+		//Deleting a vlaue from specific index
+		
+		System.out.print("\nIndex for deleting : ");
+		int deleteIndex = sc.nextInt();
+		
+		for(int i=deleteIndex;i<size;i++){
+			Array[i]=Array[i+1] ;
+		}
+		size--;
+		
+		System.out.print("\nAfter deleting : ");
+		printArray(Array) ;
+		
+		
+		//Search a value
+		
+		boolean available = searchValue(Array,50);
+		
+		if(available){
+			System.out.print("\nSearching value of 50 is available in the Array");
+		}else{
+			System.out.print("\nSearching value of 50 is not available in the Array");
+		}
+		
+		System.out.print("\nAfter Sorting the Array : ");
+		insertionSort(Array);
+		printArray(Array);
+		
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+public class StackAll{
+	
+	int[] arr;
+	int capacity;
+	int top;
+	
+	StackAll(int size){
+		arr=new int[size];
+		capacity=size;
+		top=-1;
+	}
+	
+	boolean isFull(){
+		return top+1==capacity;
+	}
+	
+	boolean isEmpty(){
+		return top==-1;
+	}
+	
+	void push(int n){
+		if(isFull()){
+			System.out.println("Over flow");
+		}
+		else{
+			top++;
+			arr[top]=n;
+			System.out.println("Insert "+n);
+		}
+	}
+	
+	void pop(){
+		if(isEmpty()){
+			System.out.println("Stack is Empty");
+		}
+		else{
+			System.out.println("Delete "+arr[top]);
+			top--;
+		}
+	}
+	
+	void printStack(){
+		for(int i=0;i<=top;i++){
+		System.out.println(arr[i]);	
+		}
+	}
+	
+	int getSize(){
+		return top+1;	
+	}
+	
+	public void sortDecending(){
+		
+		for(int i=1;i<=top;i++){
+			int key=arr[i];
+			int j=i-1;
+			
+			while((j>-1)&&(arr[j]>key)){
+				arr[j+1]=arr[j];
+				j--;
+			}
+			arr[j+1]=key;
+		}
+	}
+	
+	 void checkPalindrome() {
+        
+        boolean isPalindrome = true;
+        
+        int start = 0;
+        int end = top;
+        
+        while (start < end) {
+            if (arr[start] != arr[end]) {
+                isPalindrome = false;
+                break;
+            }
+            
+            start++;
+            end--;
+        }
+        
+        if (isPalindrome) {
+            System.out.println("Given input is a Palindrome");
+        } else {
+            System.out.println("Given input is not a palindrome");
+        }
+    }
+    
+	
+	
+	
+	
+	public static void main (String[] args){
+		StackAll stk=new StackAll(5);
+		
+		stk.push(5);
+		stk.push(10);
+		stk.push(15);
+		stk.push(10);
+		stk.push(5);
+		
+		/*stk.pop();
+		stk.pop();*/
+		
+		System.out.println("\nPrint Stack");	
+		stk.printStack();
+		
+		System.out.println("\nSize of the stack is "+stk.getSize());
+		
+		/*System.out.println("\nSort the stack Dec");
+		stk.sortDecending();
+		stk.printStack();*/
+		
+		stk.checkPalindrome();
+		
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class LinkedList {
+
+    Node head;
+
+    // Inner class Node
+    class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    // Add a node at the end of the list
+    public void add(int data) {
+        Node node = new Node(data);
+        if (head == null) {
+            head = node;
+        } else {
+            Node curr = head;
+            while (curr.next != null) {
+                curr = curr.next;
+            }
+            curr.next = node;
+        }
+    }
+
+    // Add a node after a specific node
+    public void addAfter(int after, int data) {
+        Node node = new Node(data);
+        Node curr = head;
+        while (curr != null) {
+            if (curr.data == after) {
+                node.next = curr.next;
+                curr.next = node;
+                break;
+            }
+            curr = curr.next;
+        }
+    }
+
+    // Add a node at the start of the list
+    public void addStart(int data) {
+        Node node = new Node(data);
+        node.next = head;
+        head = node;
+    }
+
+    // Delete a node by value
+    public void deleteSearch(int data) {
+        if (head == null) return;
+
+        if (head.data == data) {
+            head = head.next;
+            return;
+        }
+
+        Node curr = head;
+        while (curr.next != null) {
+            if (curr.next.data == data) {
+                curr.next = curr.next.next;
+                return;
+            }
+            curr = curr.next;
+        }
+    }
+
+    // Print the list
+    public void printList() {
+        Node curr = head;
+        while (curr != null) {
+            System.out.print(curr.data + " -> ");
+            curr = curr.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.printList(); // Output: 1 -> 2 -> 3 -> null
+
+        list.addAfter(2, 4);
+        list.printList(); // Output: 1 -> 2 -> 4 -> 3 -> null
+
+        list.addStart(0);
+        list.printList(); // Output: 0 -> 1 -> 2 -> 4 -> 3 -> null
+
+        list.deleteSearch(2);
+        list.printList(); // Output: 0 -> 1 -> 4 -> 3 -> null
+
+        list.deleteSearch(0);
+        list.printList(); // Output: 1 -> 4 -> 3 -> null
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+public class DoublyLinkedList {
+
+    Node head;
+
+    // Inner class Node
+    class Node {
+        int data;
+        Node next;
+        Node prev;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+            this.prev = null;
+        }
+    }
+
+    // Add a node at the end of the list
+    public void add(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node curr = head;
+            while (curr.next != null) {
+                curr = curr.next;
+            }
+            curr.next = newNode;
+            newNode.prev = curr;
+        }
+    }
+
+    // Add a node after a specific node
+    public void addAfter(int after, int data) {
+        Node newNode = new Node(data);
+        Node curr = head;
+        while (curr != null) {
+            if (curr.data == after) {
+                newNode.next = curr.next;
+                newNode.prev = curr;
+                if (curr.next != null) {
+                    curr.next.prev = newNode;
+                }
+                curr.next = newNode;
+                break;
+            }
+            curr = curr.next;
+        }
+    }
+
+    // Add a node at the start of the list
+    public void addStart(int data) {
+        Node newNode = new Node(data);
+        newNode.next = head;
+        if (head != null) {
+            head.prev = newNode;
+        }
+        head = newNode;
+    }
+
+    // Delete a node by value
+    public void deleteSearch(int data) {
+        if (head == null) return;
+
+        if (head.data == data) {
+            head = head.next;
+            if (head != null) {
+                head.prev = null;
+            }
+            return;
+        }
+
+        Node curr = head;
+        while (curr != null) {
+            if (curr.data == data) {
+                if (curr.prev != null) {
+                    curr.prev.next = curr.next;
+                }
+                if (curr.next != null) {
+                    curr.next.prev = curr.prev;
+                }
+                return;
+            }
+            curr = curr.next;
+        }
+    }
+
+    // Print the list
+    public void printList() {
+        Node curr = head;
+        while (curr != null) {
+            System.out.print(curr.data + " <-> ");
+            curr = curr.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        DoublyLinkedList list = new DoublyLinkedList();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.printList(); // Output: 1 <-> 2 <-> 3 <-> null
+
+        list.addAfter(2, 4);
+        list.printList(); // Output: 1 <-> 2 <-> 4 <-> 3 <-> null
+
+        list.addStart(0);
+        list.printList(); // Output: 0 <-> 1 <-> 2 <-> 4 <-> 3 <-> null
+
+        list.deleteSearch(2);
+        list.printList(); // Output: 0 <-> 1 <-> 4 <-> 3 <-> null
+
+        list.deleteSearch(0);
+        list.printList(); // Output: 1 <-> 4 <-> 3 <-> null
+    }
+}
