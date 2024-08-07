@@ -18,6 +18,9 @@ public class DoublyLinkedList {
     // Add a node at the end of the list
     public void add(int data) {
         Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
             Node curr = head;
             while (curr.next != null) {
                 curr = curr.next;
@@ -35,6 +38,9 @@ public class DoublyLinkedList {
             if (curr.data == after) {
                 newNode.next = curr.next;
                 newNode.prev = curr;
+                if (curr.next != null) {
+                    curr.next.prev = newNode;
+                }
                 curr.next = newNode;
                 break;
             }
