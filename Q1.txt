@@ -1,239 +1,344 @@
-import java.util.*;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess a Random Number</title>
+</head>
+<body>
 
-public class ArrayAll{
-	
-	public static void printArray(int[] A){
-		
-		int n=A.length;
-		for(int i=0;i<n;i++){
-			System.out.print(A[i] + " ");
-		}
-		System.out.println();
-	}
-	
-	public static boolean searchValue(int[] A,int target){
-		
-		int n = A.length;
-		for(int	i=0;i<n;i++){
-			if(A[i]==target){
-				return true ;
-			}
-		}
-		return false ;
-	}
-	
-	public static void insertionSort(int[] A){
-		int n=A.length;
-		for(int i=1;i<n;i++){
-			int key=A[i];
-			int j=i-1;
-			
-			while((j>-1)&&(A[j]>key)){
-				A[j+1]=A[j];
-				j--;
-			}
-			A[j+1]=key;
-		}
-	}
-	
-	
-	public static void main(String[] args){
-		
-		Scanner sc = new Scanner(System.in);
-		
-		int[] Array = new int[10];
-		int size = 5 ;
-		
-		System.out.println("\nInput values for Array");
-		for(int i=0;i<size;i++){
-			Array[i]=sc.nextInt();
-		}
-		
-		System.out.print("\nInputed values of Array : ");
-		printArray(Array);
-		
-		
-		//Inserting a value for specific index
-		
-		System.out.print("\nInsert the value : ");
-		int insertValue = sc.nextInt();
-		
-		System.out.print("\nIndex for inserting : ");
-		int insertIndex = sc.nextInt();
-		
-		for(int i=size-1;i>=insertIndex;i--){
-			Array[i+1]=Array[i];
-		}
-		Array[insertIndex]=insertValue ;
-		size++;
-		
-		System.out.print("\nAfter inserting : ");
-		printArray(Array) ;
-		
-		
-		
-		//Deleting a vlaue from specific index
-		
-		System.out.print("\nIndex for deleting : ");
-		int deleteIndex = sc.nextInt();
-		
-		for(int i=deleteIndex;i<size;i++){
-			Array[i]=Array[i+1] ;
-		}
-		size--;
-		
-		System.out.print("\nAfter deleting : ");
-		printArray(Array) ;
-		
-		
-		//Search a value
-		
-		boolean available = searchValue(Array,50);
-		
-		if(available){
-			System.out.print("\nSearching value of 50 is available in the Array");
-		}else{
-			System.out.print("\nSearching value of 50 is not available in the Array");
-		}
-		
-		System.out.print("\nAfter Sorting the Array : ");
-		insertionSort(Array);
-		printArray(Array);
-		
-		
-	}
+    <p>What number am I thinking of now?</p>
+    <p>(The number is between 1 and 100)</p>
+    <p><input type="text" id="userGuess"></p>
+    <p><button id="guessButton">Submit Guess</button></p>
+
+    <script>
+        // Function to generate a random number between min and max (inclusive)
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Define min and max values
+        var min = 1;
+        var max = 100;
+
+        // Generate a random number between min and max
+        var randomNumber = getRandomNumber(min, max);
+
+        // Event listener for the button click
+        document.getElementById("guessButton").onclick = function () {
+            // Get the user's guess from the input field
+            var userGuess = parseInt(document.getElementById("userGuess").value, 10);
+
+            // Check if the user's guess matches the random number
+            if (userGuess === randomNumber) {
+                alert("Congratulations! You guessed correctly.");
+            } else {
+                alert("Nope! Try again. The number was " + randomNumber);
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+<html>
+  <head>
+     <link rel="stylesheet" href="tt.css">
+    <title> time </title>
+
+    <style>
+
+{
+	border:2px,solid,blue;
+    padding:50px;
+	width:40%;
+	height:70%;
+
+}
+
+.one
+{
+	position:absolute;
+	top:120px;
+    left:400px;
+}
+
+.line {
+	width: 0;
+	height: 60%;
+	border: 1px solid black;
+	position: fixed;
+	top: 19%;
+	left: 24.5%;
 }
 
 
+    </style>
+  </head>
+  
+  <body >
+     <h1 style="text-align:center"> Speaker Registration </h1>
+     <div>
+	  
+	 <table> 
+        <tr>
+           <td><br>Prefix</td>
+           <td><br><input type="text" style="width:200px"></td>		
+        </tr> 
+     
+       <tr>
+           <td><br>Name</td>
+           <td><br><input type="text" style="width:120px"    placeholder="First Name";>  
+            <input type="text" style="width:80px"  placeholder="Last Name";></td>		 
+          			   
+        </tr>
 
 
+      <tr>
+           <td><br>Email</td>
+           <td><br><input type="text"  style="width:200px"  placeholder="sample@example.com";></td>		
+        </tr> 	
 
+      <tr>
+           <td> <br>Work Phone</td>
+           <td><br><input type="text" style="width:200px"></td>		
+        </tr> 	
 
+      
+       <tr>
+           <td><br>Job Title</td>
+	   	   
+           <td><br><input type="text" style="width:200px"></td>		
+        </tr> 	
 
-
-
-
-
-
-public class StackAll{
-	
-	int[] arr;
-	int capacity;
-	int top;
-	
-	StackAll(int size){
-		arr=new int[size];
-		capacity=size;
-		top=-1;
-	}
-	
-	boolean isFull(){
-		return top+1==capacity;
-	}
-	
-	boolean isEmpty(){
-		return top==-1;
-	}
-	
-	void push(int n){
-		if(isFull()){
-			System.out.println("Over flow");
-		}
-		else{
-			top++;
-			arr[top]=n;
-			System.out.println("Insert "+n);
-		}
-	}
-	
-	void pop(){
-		if(isEmpty()){
-			System.out.println("Stack is Empty");
-		}
-		else{
-			System.out.println("Delete "+arr[top]);
-			top--;
-		}
-	}
-	
-	void printStack(){
-		for(int i=0;i<=top;i++){
-		System.out.println(arr[i]);	
-		}
-	}
-	
-	int getSize(){
-		return top+1;	
-	}
-	
-	public void sortDecending(){
-		
-		for(int i=1;i<=top;i++){
-			int key=arr[i];
-			int j=i-1;
-			
-			while((j>-1)&&(arr[j]>key)){
-				arr[j+1]=arr[j];
-				j--;
-			}
-			arr[j+1]=key;
-		}
-	}
-	
-	 void checkPalindrome() {
+      </table> 
+	   
+          
+	      <p>Affiliation / Company/Oranization</p>
+	     
+		  
+		  <p><input type="text"  style="width:250px"></p>
         
-        boolean isPalindrome = true;
-        
-        int start = 0;
-        int end = top;
-        
-        while (start < end) {
-            if (arr[start] != arr[end]) {
-                isPalindrome = false;
-                break;
-            }
-            
-            start++;
-            end--;
-        }
-        
-        if (isPalindrome) {
-            System.out.println("Given input is a Palindrome");
-        } else {
-            System.out.println("Given input is not a palindrome");
-        }
-    }
+          
+          
+
+
+
+<table>
+       <tr>
+	      <td><br>Location &nbsp&nbsp</td> 
+          <td><br><input type="text"></td>	
+        </tr>
+</table>
+
+     	
+      <tr>
+           <td><br>Do you need assistance with your<br> flight reservation ?</td>
+           		
+        </tr> 
     
+       </table>
+	   
+	   <p>
+           <input type = "radio" name="do"> Yes  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type = "radio" name="do"> No 
+	   </p>		
+
+       	   
+	   </div>
+	   
+	   
+<div class="line"></div>	  
+	 
+	   
+	   
+	    <div class="one">
+		
+	 
+	     <p> What is your presentation type? </p>
+	   
+           <p><input type = "radio" name="d"> Lecture</p>
+           <p> <input type = "radio" name="d"> Case Study </p>
+		   <p><input type = "radio" name="d"> Group Discussion</p>
+           <p> <input type = "radio" name="d"> Product Demo </p> <br>
+		   
+		   <p>Please share the title of your <br>
+		      presentation / speech <p> 
+			  
+		    <p><input type="text" style="width:250px" >	</p>  <br>
+			
+			<p> Do you have any needs from a <br>
+			moderator ? </p>
+			 <p><input type="text" style="width:250px" >	</p>  <br>
+	  
+
+
+         
+	   </div>
+	   
 	
 	
+	    
+		
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        #display {
+            width: 100%;
+            height: 40px;
+            text-align: right;
+            font-size: 1.5em;
+            border: 1px solid #000;
+            padding-right: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <input type="text" id="display" disabled>
+        <div>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendCharacter('/')">/</button>
+            <button onclick="appendCharacter('*')">*</button>
+            <button onclick="appendCharacter('-')">-</button>
+            <br>
+            <button onclick="appendCharacter('7')">7</button>
+            <button onclick="appendCharacter('8')">8</button>
+            <button onclick="appendCharacter('9')">9</button>
+            <button onclick="appendCharacter('+')">+</button>
+            <br>
+            <button onclick="appendCharacter('4')">4</button>
+            <button onclick="appendCharacter('5')">5</button>
+            <button onclick="appendCharacter('6')">6</button>
+            <br>
+            <button onclick="appendCharacter('1')">1</button>
+            <button onclick="appendCharacter('2')">2</button>
+            <button onclick="appendCharacter('3')">3</button>
+            <br>
+            <button onclick="appendCharacter('0')">0</button>
+            <button onclick="appendCharacter('.')">.</button>
+            <button onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function appendCharacter(character) {
+            document.getElementById('display').value += character;
+        }
+
+        function calculateResult() {
+			let display = document.getElementById('display');
+			display.value = eval(display.value) || 'Error';
+		}
+
+    </script>
+
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottery Program</title>
+</head>
+<body>
+
+<h2>Lottery Ticket</h2>
+<table border="1" cellpadding="5" cellspacing="0">
+    <tbody id="lottery"></tbody>
+</table>
+
+<script>
+    // Generate and display the lottery ticket
+    const lotteryTable = document.getElementById("lottery");
+
+    for (let i = 0; i < 10; i++) {
+        const row = lotteryTable.insertRow();
+        for (let j = 0; j < 5; j++) {
+            const cell = row.insertCell();
+            cell.textContent = Math.floor(Math.random() * 50) + 1;
+        }
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+<html>
+	<head></head
 	
-	
-	public static void main (String[] args){
-		StackAll stk=new StackAll(5);
+	<body>
+		<lable>Enter Decimal Number:</label>
+		<input type="text" id="input"><br><br>
 		
-		stk.push(5);
-		stk.push(10);
-		stk.push(15);
-		stk.push(10);
-		stk.push(5);
+		<button id="convert">Convert</button>
+		<button id="reset">Reset</button><br><br>
 		
-		/*stk.pop();
-		stk.pop();*/
+		<lable>Binary Number</lable>
+		<input type="type" id="bi"><br><br>
 		
-		System.out.println("\nPrint Stack");	
-		stk.printStack();
+		<lable>Hex Number</lable>
+		<input type="type" id="hx"><br><br>
 		
-		System.out.println("\nSize of the stack is "+stk.getSize());
-		
-		/*System.out.println("\nSort the stack Dec");
-		stk.sortDecending();
-		stk.printStack();*/
-		
-		stk.checkPalindrome();
+		<lable>Octal Number</lable>
+		<input type="type" id="oc"><br><br>
 		
 		
-	}
-}
+		
+		<script>
+		
+			document.getElementById("convert").onclick=function(){
+			
+				let decimalInput=parseInt(document.getElementById("input").value,10);
+				
+				let binaryOutput=decimalInput.toString(2).toUpperCase();
+				let hexOutput=decimalInput.toString(16).toUpperCase();
+				let octalOutput=decimalInput.toString(8).toUpperCase();
+				
+				document.getElementById("bi").value=binaryOutput;
+				document.getElementById("hx").value=hexOutput;
+				document.getElementById("oc").value=octalOutput;
+				
+			}
+			
+			document.getElementById("reset").onclick=function(){
+				
+				document.getElementById("input").value='';
+				document.getElementById("bi").value='';
+				document.getElementById("hx").value='';
+				document.getElementById("oc").value='';
+				
+			}
+			
+			
+		</script>
+	</body>
+</html>
 
 
 
@@ -246,239 +351,3 @@ public class StackAll{
 
 
 
-
-
-
-
-
-
-public class LinkedList {
-
-    Node head;
-
-    // Inner class Node
-    class Node {
-        int data;
-        Node next;
-
-        Node(int data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
-
-    // Add a node at the end of the list
-    public void add(int data) {
-        Node node = new Node(data);
-        if (head == null) {
-            head = node;
-        } else {
-            Node curr = head;
-            while (curr.next != null) {
-                curr = curr.next;
-            }
-            curr.next = node;
-        }
-    }
-
-    // Add a node after a specific node
-    public void addAfter(int after, int data) {
-        Node node = new Node(data);
-        Node curr = head;
-        while (curr != null) {
-            if (curr.data == after) {
-                node.next = curr.next;
-                curr.next = node;
-                break;
-            }
-            curr = curr.next;
-        }
-    }
-
-    // Add a node at the start of the list
-    public void addStart(int data) {
-        Node node = new Node(data);
-        node.next = head;
-        head = node;
-    }
-
-    // Delete a node by value
-    public void deleteSearch(int data) {
-        if (head == null) return;
-
-        if (head.data == data) {
-            head = head.next;
-            return;
-        }
-
-        Node curr = head;
-        while (curr.next != null) {
-            if (curr.next.data == data) {
-                curr.next = curr.next.next;
-                return;
-            }
-            curr = curr.next;
-        }
-    }
-
-    // Print the list
-    public void printList() {
-        Node curr = head;
-        while (curr != null) {
-            System.out.print(curr.data + " -> ");
-            curr = curr.next;
-        }
-        System.out.println("null");
-    }
-
-    public static void main(String[] args) {
-        LinkedList list = new LinkedList();
-
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.printList(); // Output: 1 -> 2 -> 3 -> null
-
-        list.addAfter(2, 4);
-        list.printList(); // Output: 1 -> 2 -> 4 -> 3 -> null
-
-        list.addStart(0);
-        list.printList(); // Output: 0 -> 1 -> 2 -> 4 -> 3 -> null
-
-        list.deleteSearch(2);
-        list.printList(); // Output: 0 -> 1 -> 4 -> 3 -> null
-
-        list.deleteSearch(0);
-        list.printList(); // Output: 1 -> 4 -> 3 -> null
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-public class DoublyLinkedList {
-
-    Node head;
-
-    // Inner class Node
-    class Node {
-        int data;
-        Node next;
-        Node prev;
-
-        Node(int data) {
-            this.data = data;
-            this.next = null;
-            this.prev = null;
-        }
-    }
-
-    // Add a node at the end of the list
-    public void add(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-        } else {
-            Node curr = head;
-            while (curr.next != null) {
-                curr = curr.next;
-            }
-            curr.next = newNode;
-            newNode.prev = curr;
-        }
-    }
-
-    // Add a node after a specific node
-    public void addAfter(int after, int data) {
-        Node newNode = new Node(data);
-        Node curr = head;
-        while (curr != null) {
-            if (curr.data == after) {
-                newNode.next = curr.next;
-                newNode.prev = curr;
-                if (curr.next != null) {
-                    curr.next.prev = newNode;
-                }
-                curr.next = newNode;
-                break;
-            }
-            curr = curr.next;
-        }
-    }
-
-    // Add a node at the start of the list
-    public void addStart(int data) {
-        Node newNode = new Node(data);
-        newNode.next = head;
-        if (head != null) {
-            head.prev = newNode;
-        }
-        head = newNode;
-    }
-
-    // Delete a node by value
-    public void deleteSearch(int data) {
-        if (head == null) return;
-
-        if (head.data == data) {
-            head = head.next;
-            if (head != null) {
-                head.prev = null;
-            }
-            return;
-        }
-
-        Node curr = head;
-        while (curr != null) {
-            if (curr.data == data) {
-                if (curr.prev != null) {
-                    curr.prev.next = curr.next;
-                }
-                if (curr.next != null) {
-                    curr.next.prev = curr.prev;
-                }
-                return;
-            }
-            curr = curr.next;
-        }
-    }
-
-    // Print the list
-    public void printList() {
-        Node curr = head;
-        while (curr != null) {
-            System.out.print(curr.data + " <-> ");
-            curr = curr.next;
-        }
-        System.out.println("null");
-    }
-
-    public static void main(String[] args) {
-        DoublyLinkedList list = new DoublyLinkedList();
-
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.printList(); // Output: 1 <-> 2 <-> 3 <-> null
-
-        list.addAfter(2, 4);
-        list.printList(); // Output: 1 <-> 2 <-> 4 <-> 3 <-> null
-
-        list.addStart(0);
-        list.printList(); // Output: 0 <-> 1 <-> 2 <-> 4 <-> 3 <-> null
-
-        list.deleteSearch(2);
-        list.printList(); // Output: 0 <-> 1 <-> 4 <-> 3 <-> null
-
-        list.deleteSearch(0);
-        list.printList(); // Output: 1 <-> 4 <-> 3 <-> null
-    }
-}
